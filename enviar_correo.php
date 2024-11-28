@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 // Captura la respuesta del reCAPTCHA
-$to_email = "miltonrodriguezdavalos@gmail.com";
+$to_email = "salvatierrav171@gmail.com";
 $subject = $_POST['subject'];
 $mensaje = $_POST['mensaje'];
 $remitente = $_POST['remitente'];
