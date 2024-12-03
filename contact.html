@@ -141,7 +141,7 @@
         <!-- Full Screen Search End -->
 
        
-      <!-- Contact Start -->
+          <!-- Contact Start -->
 <div class="container-xxl py-5 bg-light">
     <div class="container px-lg-5">
         <div class="row justify-content-center">
@@ -151,40 +151,33 @@
                     <h2 class="mt-2">Contacta para cualquier consulta</h2>
                 </div>
                 <div class="wow fadeInUp" data-wow-delay="0.3s">
-                    <form id="contactForm" action="enviar_correo.php" method="POST">
+                    <!-- Formulario adaptado a Formspree -->
+                    <form id="contactForm" action="https://formspree.io/f/mkgnywaj" method="POST">
                         <div class="row g-3">
+                            <!-- Campo de email -->
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Tu Nombre">
-                                    <label for="name">Tu Nombre</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Tu Email" required>
+                                    <label for="email">Tu Email</label>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="remitente" placeholder="Tu Email">
-                                    <label for="remitente">Tu Email</label>
-                                </div>
-                            </div>
+                            <!-- Campo de mensaje -->
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Asunto">
-                                    <label for="subject">Asunto</label>
+                                    <textarea class="form-control" placeholder="Escribe tu mensaje aquí" id="message" name="message" style="height: 150px" required></textarea>
+                                    <label for="message">Mensaje</label>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Escribe tu mensaje aquí" id="mensaje" style="height: 150px"></textarea>
-                                    <label for="mensaje">Mensaje</label>
-                                </div>
-                            </div>
-                            <div id="successMessage" style="display: none;" class="alert alert-success mt-3" role="alert">
-                                ¡El mensaje se ha enviado correctamente!
-                            </div>
+                            <!-- Botón de envío -->
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">Enviar Mensaje</button>
                             </div>
                         </div>
                     </form>
+                    <!-- Mensaje de confirmación -->
+                    <div id="successMessage" style="display: none;" class="alert alert-success mt-3" role="alert">
+                        ¡Tu mensaje ha sido enviado exitosamente!
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,6 +185,32 @@
 </div>
 <!-- Contact End -->
 
+<!-- Script para limpiar formulario y mostrar mensaje -->
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita el envío automático del formulario
+        const form = e.target;
+
+        // Enviar el formulario de manera programada
+        fetch(form.action, {
+            method: form.method,
+            body: new FormData(form),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    // Limpiar el contenido del formulario
+                    form.reset();
+                    // Mostrar el mensaje de éxito
+                    document.getElementById('successMessage').style.display = 'block';
+                } else {
+                    alert('Ocurrió un error al enviar el mensaje. Por favor, inténtalo nuevamente.');
+                }
+            })
+            .catch(() => {
+                alert('No se pudo enviar el mensaje. Verifica tu conexión a internet.');
+            });
+    });
+</script>
         
 
          <!-- Footer Start -->
